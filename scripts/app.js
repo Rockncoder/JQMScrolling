@@ -1,7 +1,9 @@
-﻿"use strict";
-
+﻿
+// Next two lines for JS-Lint, first a pragma instruction, then global vars specified
+"use strict";
 var $, iScroll, window, alert;
 
+// create our own namespace
 var RocknCoder = RocknCoder || {};
 RocknCoder.Pages = RocknCoder.Pages || {};
 
@@ -23,9 +25,11 @@ RocknCoder.Pages.Events = (function () {
 
 RocknCoder.Dimensions = (function () {
 	var width, height, headerHeight, footerHeight, contentHeight,
-
-		getContentHeight = function () {
-			return contentHeight;
+		getDimensions = function () {
+			return {
+				width: width,
+				height: contentHeight
+			};
 		},
 		init = function () {
 			width = $(window).width();
@@ -36,35 +40,25 @@ RocknCoder.Dimensions = (function () {
 		};
 	return {
 		init: init,
-		getContentHeight: getContentHeight
+		getDimensions: getDimensions
 	};
 }());
 
 RocknCoder.Pages.homePage = (function () {
-	var pageinit = function () {
-		},
-		pageshow = function () {
+	var pageshow = function () {
 			RocknCoder.Dimensions.init();
-			var height = RocknCoder.Dimensions.getContentHeight();
+			var dim = RocknCoder.Dimensions.getDimensions();
 			// determine the height dynamically
-			$("#horizontalWrapper").css('height', height);
-			$("#verticalWrapper").css('height', height);
-			//alert("height = "+screen.height);
-		},
-		pagehide = function () {
+			$("#horizontalWrapper").css('height', dim.height);
+			$("#verticalWrapper").css('height', dim.height);
 		};
 	return {
-		pageinit: pageinit,
-		pageshow: pageshow,
-		pagehide: pagehide
+		pageshow: pageshow
 	};
 }());
 
 RocknCoder.Pages.verticalPage = (function () {
 	var myScroll,
-
-		pageinit = function () {
-		},
 		pageshow = function () {
 			myScroll = new iScroll('verticalWrapper');
 
@@ -74,7 +68,6 @@ RocknCoder.Pages.verticalPage = (function () {
 			myScroll = null;
 		};
 	return {
-		pageinit: pageinit,
 		pageshow: pageshow,
 		pagehide: pagehide
 	};
@@ -82,9 +75,6 @@ RocknCoder.Pages.verticalPage = (function () {
 
 RocknCoder.Pages.horizontalPage = (function () {
 	var myScroll,
-
-		pageinit = function () {
-		},
 		pageshow = function () {
 			myScroll = new iScroll('horizontalWrapper');
 		},
@@ -93,7 +83,6 @@ RocknCoder.Pages.horizontalPage = (function () {
 			myScroll = null;
 		};
 	return {
-		pageinit: pageinit,
 		pageshow: pageshow,
 		pagehide: pagehide
 	};
