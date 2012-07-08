@@ -25,7 +25,7 @@ RocknCoder.Pages.Events = (function () {
 
 RocknCoder.Dimensions = (function () {
 	var width, height, headerHeight, footerHeight, contentHeight,
-		getDimensions = function () {
+		getContentDimensions = function () {
 			return {
 				width: width,
 				height: contentHeight
@@ -40,15 +40,15 @@ RocknCoder.Dimensions = (function () {
 		};
 	return {
 		init: init,
-		getDimensions: getDimensions
+		getContent: getContentDimensions
 	};
 }());
 
 RocknCoder.Pages.homePage = (function () {
 	var pageshow = function () {
 			RocknCoder.Dimensions.init();
-			var dim = RocknCoder.Dimensions.getDimensions();
 			// determine the height dynamically
+			var dim = RocknCoder.Dimensions.getContent();
 			$("#horizontalWrapper").css('height', dim.height);
 			$("#verticalWrapper").css('height', dim.height);
 		};
