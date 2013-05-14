@@ -5,10 +5,10 @@
 	<title>JQM Scrolling</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
-	<link href="content/jquery.mobile-1.1.0.min.css" rel="stylesheet" type="text/css" />
+	<link href="content/jquery.mobile-1.3.1.min.css" rel="stylesheet" type="text/css" />
 	<link href="content/style.css" rel="stylesheet" type="text/css" />
-	<script src="scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
-	<script src="scripts/jquery.mobile-1.1.0.min.js" type="text/javascript"></script>
+	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="scripts/jquery.mobile-1.3.1.min.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="homePage" data-role="page" data-rockncoder-jspage="homePage">
@@ -19,12 +19,15 @@
 			<ul data-role="listview" data-inset="true">
 				<li><a href="#verticalPage">Vertical Scrolling</a></li>
 				<li><a href="#horizontalPage">Horizontal Scrolling</a></li>
+        <li><a href="#twoWayPage">Two Way Scrolling</a></li>
 			</ul>
 		</section>
 		<footer data-role="footer" data-position="fixed">
 			<h1>footer</h1>
 		</footer>
 	</div>
+
+  <!-- Vertical Scrolling -->
 	<div id="verticalPage" data-role="page" data-rockncoder-jspage="verticalPage">
 		<header data-role="header" data-position="fixed">
 			<h1>Vertical</h1>
@@ -67,7 +70,9 @@
 			<h2>(swipe vertically)</h2>
 		</footer>
 	</div>
-	<div id="horizontalPage" data-role="page" data-rockncoder-jspage="horizontalPage">
+
+  <!-- Horizontal Scrolling -->
+  <div id="horizontalPage" data-role="page" data-rockncoder-jspage="horizontalPage">
 		<header data-role="header" data-position="fixed">
 			<h1>Horizontal</h1>
 		</header>
@@ -109,6 +114,86 @@
 			<h1>(swipe horizontally)</h1>
 		</footer>
 	</div>
+
+  <!-- Vertical & Horizontal Scrolling -->
+  <div id="twoWayPage" data-role="page" data-rockncoder-jspage="twoWayPage">
+    <header data-role="header" data-position="fixed">
+      <h1>Two Way</h1>
+    </header>
+    <section data-role="content"  class="scroller">
+      <div id="vWrapper" class="verticalWrapper">
+        <div id="vScroller" class="verticalScroller">
+          <ul>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+            <li>D</li>
+            <li>E</li>
+            <li>F</li>
+            <li>G</li>
+            <li>H</li>
+            <li>I</li>
+            <li>J</li>
+            <li>K</li>
+            <!--<li>L</li>-->
+
+            <div id="hWrapper" class="horizontalWrapper">
+              <div id="hScroller" class="horizontalScroller">
+                <ul>
+                  <li>A</li>
+                  <li>B</li>
+                  <li>C</li>
+                  <li>D</li>
+                  <li>E</li>
+                  <li>F</li>
+                  <li>G</li>
+                  <li>H</li>
+                  <li>I</li>
+                  <li>J</li>
+                  <li>K</li>
+                  <li>L</li>
+                  <li>M</li>
+                  <li>N</li>
+                  <li>O</li>
+                  <li>P</li>
+                  <li>Q</li>
+                  <li>R</li>
+                  <li>S</li>
+                  <li>T</li>
+                  <li>U</li>
+                  <li>V</li>
+                  <li>W</li>
+                  <li>X</li>
+                  <li>Y</li>
+                  <li>Z</li>
+                </ul>
+              </div>
+            </div>
+
+            <li>M</li>
+            <li>N</li>
+            <li>O</li>
+            <li>P</li>
+            <li>Q</li>
+            <li>R</li>
+            <li>S</li>
+            <li>T</li>
+            <li>U</li>
+            <li>V</li>
+            <li>W</li>
+            <li>X</li>
+            <li>Y</li>
+            <li>Z</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <footer data-role="footer" data-position="fixed">
+      <h1>(footer)</h1>
+    </footer>
+  </div>
+
+
 	<script src="scripts/iscroll-lite.js" type="text/javascript"></script>
 	<script src="scripts/app.js" type="text/javascript"></script>
 </body>

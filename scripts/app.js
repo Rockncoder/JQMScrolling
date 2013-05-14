@@ -25,65 +25,82 @@ RocknCoder.Pages.Events = (function () {
 
 RocknCoder.Dimensions = (function () {
 	var width, height, headerHeight, footerHeight, contentHeight,
-		getContentDimensions = function () {
-			return {
-				width: width,
-				height: contentHeight
-			};
-		},
-		init = function () {
-			width = $(window).width();
-			height = $(window).height();
-			headerHeight = $("header", $.mobile.activePage).height();
-			footerHeight = $("footer", $.mobile.activePage).height();
-			contentHeight = height - headerHeight - footerHeight;
-		};
+    isIPhone = (/iphone/gi).test(navigator.appVersion),
+    iPhoneHeight = (isIPhone ?  60 : 0);
 	return {
-		init: init,
-		getContent: getContentDimensions
+		init: function () {
+      width = $(window).width();
+      height = $(window).height();
+      headerHeight = $("header", $.mobile.activePage).height();
+      footerHeight = $("footer", $.mobile.activePage).height();
+      contentHeight = height - headerHeight - footerHeight + iPhoneHeight;
+    },
+		getContent: function () {
+      return {
+        width: width,
+        height: contentHeight
+      };
+    }
 	};
 }());
 
 RocknCoder.Pages.homePage = (function () {
-	var pageshow = function () {
-			RocknCoder.Dimensions.init();
-			// determine the height dynamically
-			var dim = RocknCoder.Dimensions.getContent();
-			$("#horizontalWrapper").css('height', dim.height);
-			$("#verticalWrapper").css('height', dim.height);
-		};
 	return {
-		pageshow: pageshow
+		pageshow: function () {
+      RocknCoder.Dimensions.init();
+      // determine the height dynamically
+      var dim = RocknCoder.Dimensions.getContent();
+      $("#horizontalWrapper").css('height', dim.height);
+      $("#verticalWrapper").css('height', dim.height);
+    }
 	};
 }());
 
 RocknCoder.Pages.verticalPage = (function () {
-	var myScroll,
-		pageshow = function () {
-			myScroll = new iScroll('verticalWrapper');
-
-		},
-		pagehide = function () {
-			myScroll.destroy();
-			myScroll = null;
-		};
+	var myScroll;
 	return {
-		pageshow: pageshow,
-		pagehide: pagehide
+		pageshow: function () {
+      myScroll = new iScroll('verticalWrapper');
+    },
+		pagehide: function () {
+      myScroll.destroy();
+      myScroll = null;
+    }
 	};
 }());
 
 RocknCoder.Pages.horizontalPage = (function () {
-	var myScroll,
-		pageshow = function () {
-			myScroll = new iScroll('horizontalWrapper');
-		},
-		pagehide = function () {
-			myScroll.destroy();
-			myScroll = null;
-		};
+	var myScroll;
 	return {
-		pageshow: pageshow,
-		pagehide: pagehide
+		pageshow: function () {
+      myScroll = new iScroll('horizontalWrapper');
+    },
+		pagehide: function () {
+      myScroll.destroy();
+      myScroll = null;
+    }
 	};
+}());
+
+
+
+
+RocknCoder.Pages.twoWayPage = (function () {
+  var verticalScroller, horizontalScroller;
+  return {
+    pageshow: function () {
+      RocknCoder.Dimensions.init();
+      // determine the height dynamically
+      var dim = RocknCoder.Dimensions.getContent();
+      $("#vWrapper").css('height', dim.height);
+      verticalScroller = new iScroll('vWrapper');
+      horizontalScroller = new iScroll('hWrapper');
+    },
+    pagehide: function () {
+      verticalScroller.destroy();
+      verticalScroller = null;
+      horizontalScroller.destroy();
+      horizontalScroller = null;
+    }
+  };
 }());

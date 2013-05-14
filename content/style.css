@@ -26,19 +26,19 @@
 }
 
 /* only for vertical scrolling */
-#verticalWrapper {
+#verticalWrapper, .verticalWrapper {
 	width: 100%;     /* will be the same as the width of the content area */
 	height: 240px;   /* will be changed by JavaScript to the height of the content area */
 	overflow: auto;
 }
 
-#verticalScroller {
+#verticalScroller, .verticalScroller {
 	width: 100%;
 	height: 3240px;  /* max number scroll elements + 1 times their height */
 	background-color: #f00;
 }
 
-#verticalScroller li {
+#verticalScroller li, .verticalScroller li {
 	width: 100%;
 	height: 120px;  /* this is the height of an individual element */
 	border-top: 1px solid #ccc;
@@ -46,19 +46,19 @@
 }
 
 /* only for horizontal scrolling */
-#horizontalWrapper {
+#horizontalWrapper, .horizontalWrapper {
 	width: 100%;
-	height: 240px;   /* will be changed by JavaScript to the height of the content area */
+	height: 130px;   /* will be changed by JavaScript to the height of the content area */
 	overflow: auto;
 }
 
-#horizontalScroller {
+#horizontalScroller, .horizontalScroller {
 	width: 3240px;  /* max number scroll elements + 1 times their width */
 	height: 100%;   /* it will be the same as the wrapper's height even after it is changed */
 	background-color: #0f0;
 }
 
-#horizontalScroller li {
+#horizontalScroller li, .horizontalScroller li {
 	width: 120px;       /* this is the width of an individual element */
 	height: 100%;
 	border-left: 1px solid #ccc;
