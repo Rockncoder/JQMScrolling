@@ -92,8 +92,8 @@ RocknCoder.Pages.horizontalPage = (function () {
 }());
 
 RocknCoder.Pages.twoWayPage = (function () {
-  var dim, verticalScroller, horizontalScroller, pullDownEl, pullDownOffset, $pullDown, $pullDownLabel,
-    pullDownAction = function() {
+  var dim, verticalScroller, horizontalScroller, pullDownEl, pullDownHeight, $pullDown, $pullDownLabel,
+    callRefresh = function() {
       setTimeout(function(){
         verticalScroller.refresh();
       },2000);
@@ -108,35 +108,36 @@ RocknCoder.Pages.twoWayPage = (function () {
       $pullDown = $('#pullDown');
       $pullDownLabel = $pullDown.find('.pullDownLabel');
       pullDownEl = document.getElementById('pullDown');
-      pullDownOffset = $pullDown.outerHeight();
+      pullDownHeight = $pullDown.outerHeight();
 
       verticalScroller = new iScroll('vWrapper', {
+          topOffset:pullDownHeight,
           useTransition:true,
-          topOffset:pullDownOffset,
+          hScrollbar: false,
+          vScrollbar: false,
           onRefresh:function () {
-            if (pullDownEl.className.match('loading')) {
-              pullDownEl.className = '';
-//              $pullDown.find('.pullDownLabel').html('Pull down to refresh...');
+            if($pullDown.hasClass('loading')){
+              $pullDown.removeClass();
               $pullDownLabel.html('Pull down to refresh...');
             }
           },
           onScrollMove:function () {
-            if (this.y > 5 && !pullDownEl.className.match('flip')) {
-              pullDownEl.className = 'flip';
-              pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
+            if (this.y > 5 && !$pullDown.hasClass('flip')) {
+              $pullDown.addClass('flip');
+              $pullDownLabel.html('Release to refresh...');
               this.minScrollY = 0;
-            } else if (this.y < 5 && pullDownEl.className.match('flip')) {
-              pullDownEl.className = '';
-              pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
-              this.minScrollY = -pullDownOffset;
+            } else if (this.y < 5 && $pullDown.hasClass('flip')) {
+              $pullDown.removeClass();
+              $pullDownLabel.html('Pull down to refresh...');
+              this.minScrollY = -pullDownHeight;
             }
           },
           onScrollEnd:function () {
-            if (pullDownEl.className.match('flip')) {
-              pullDownEl.className = 'loading';
+            if ($pullDown.hasClass('flip')) {
+              $pullDown.removeClass();
+              $pullDown.addClass('loading');
               $pullDownLabel.html('Loading...')
-//              pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
-              pullDownAction();	// Execute custom function (ajax call?)
+              callRefresh();
             }
           }
         }
